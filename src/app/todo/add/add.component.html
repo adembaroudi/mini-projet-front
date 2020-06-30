@@ -1,0 +1,20 @@
+<br>
+<br>
+
+<div class="example-container mx-4 col-12">
+
+<form [formGroup] = "list">
+  <mat-form-field appearance="outline">
+    <mat-label>cars</mat-label>
+    <input matInput type="text" formControlName="cars"/>
+    <mat-error *ngIf="list.hasError('required', 'cars')">cars is required </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>class</mat-label>
+    <input matInput type="text" formControlName="class"/>
+    <mat-error *ngIf="list.hasError('required', 'class')">class is required </mat-error>
+  </mat-form-field>
+<button  class="btn btn-primary ml-4" mat-raised-button (click)="add()">ADD</button>
+</form>
+<input type="file" name="image" (change)="fileProgress($event)" >
+</div>
