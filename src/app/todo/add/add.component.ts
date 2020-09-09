@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiserviceService } from 'src/app/apiservice.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,33 +13,35 @@ export class AddComponent implements OnInit {
   hide = true;
   list: FormGroup;
   fileToUpload :File= null;
-  constructor(private apService : ApiserviceService) { }
+  id:String;
+  vote;
+  choix : String;
+
+  constructor(private apService : ApiserviceService , private router : Router, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.list = new FormGroup ({
-      cars : new FormControl('', Validators.required),
-      class : new FormControl('', Validators.required)
-
+      titre : new FormControl('', Validators.required),
+      description : new FormControl('', Validators.required)
     });
+    this.id = this.route.snapshot.params["id"];
   }
   add() {
     this.apService.Ajout(this.list.value).subscribe((res: any) => {
-      console.log(res);
-      this.addimg(res._id)
+      this.router.navigate(["/list"]);
     });
       };
-      fileProgress(event) {
-        this.fileToUpload =<File>event.target.files[0];
-      }
-            addimg(j){
-      const  formData = new FormData();
-      formData.append("file",this.fileToUpload);
-      this.apService.upfile(j,formData).subscribe(res=>{
-        console.log(res);
-        
-      })
-
-            }
-
-
+      getOneVote(){
+        this.apService.getOne(this.id).subscribe((data: { title; description })=>{
+         this.vote.data
+        });
+       }
+       voter() {
+         this.apService.sondage({ choix: this.choix }, this.id).subscribe(() => {
+           this.router.navigate(["/list"]);
+         });
+       }
+       onSubmit(){
+         this.voter()
+       }
 }

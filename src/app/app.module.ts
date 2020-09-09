@@ -10,9 +10,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AddComponent } from './todo/add/add.component';
 import { ListComponent } from './todo/list/list.component';
-import { DisplayComponent } from './todo/display/display.component';
 import { SearchpipePipe } from './searchpipe.pipe';
-import { CheckpipePipe } from './checkpipe.pipe';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -24,7 +23,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
 
 
 @NgModule({
@@ -37,9 +36,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     LoginComponent,
     AddComponent,
     ListComponent,
-    DisplayComponent,
     SearchpipePipe,
-    CheckpipePipe
   ],
   imports: [
     BrowserModule,
@@ -54,7 +51,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     MatIconModule,
     MatCardModule ,
     HttpClientModule,
-    SocketIoModule.forRoot(config)
+    // SocketIoModule.forRoot(config)
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

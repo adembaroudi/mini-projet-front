@@ -1,53 +1,46 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ApiserviceService {
-  // baseUri = 'http://localhost:3000';
   baseUrl = environment.baseUri;
-  responseData = localStorage.getItem('token');
-  constructor(private router: Router, private http: HttpClient) { }
-  
+  responseData = localStorage.getItem("token");
+  constructor( private http: HttpClient) {}
   reg(register) {
-    const url = `${this.baseUrl}/users/register/register`;
-    console.log(register);
-    this.router.navigateByUrl('/login');
+    const url = `${this.baseUrl}/register/register`;
     return this.http.post(url, register);
   }
   signin(data) {
-    const url = `${this.baseUrl}/users/login/login2`;
+    const url = `${this.baseUrl}/login/login`;
+    return this.http.post(url, data);
+  }
+  Ajout(data) {
+    const url = `${this.baseUrl}/sujet/add`;
     console.log(data);
-    this.router.navigateByUrl('/add');
-      return this.http.post(url, data);
-      }
-      Ajout(data) {
-        const url = `${this.baseUrl}/todos/inserttodo`;
-        console.log(data);
-        return this.http.post(url, data);
-      }
-      getall() {
-        const url =`${this.baseUrl}/todos/findall`;
-        return this.http.get(url);
-      }  
-      delete(j){
-        const url =`${this.baseUrl}/todos/removedata/${j}`;
-        return this.http.delete(url);
-   }
-   update(j,data){
-     const url =`${this.baseUrl}/todos/putdata/${j}`;
-     return this.http.put(url,data);
-   }
-   upfile(j,image){
-     const url=`${this.baseUrl}/image/todo/upfile/${j}`;
-     return this.http.post(url,image)
-   }
-    getOne(j){
-      const url=`${this.baseUrl}/todos/finddata/${j}`;
-      return this.http.get(url);
-    }
-}
+    return this.http.post(url, data);
+  }
+  getall() {
+    const url = `${this.baseUrl}/sujet/all`;
+    return this.http.get(url);
+  }
 
+  getOne(j) {
+    const url = `${this.baseUrl}/sujet/getone/${j}`;
+    return this.http.get(url);
+  }
+  update(j) {
+    const url = `${this.baseUrl}/sujet/edit/${j}`;
+    return this.http.put(url,j);
+  }
+  delete(j) {
+    const url = `${this.baseUrl}/sujet/delete/${j}`;
+    return this.http.delete(url);
+  }
+  sondage(choix, j) {
+    const url = `${this.baseUrl}/yesorno/sondage/${j}`;
+    return this.http.put(url , choix);
+  }
+}

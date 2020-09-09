@@ -5,16 +5,33 @@
 
 <form [formGroup] = "list">
   <mat-form-field appearance="outline">
-    <mat-label>cars</mat-label>
-    <input matInput type="text" formControlName="cars"/>
-    <mat-error *ngIf="list.hasError('required', 'cars')">cars is required </mat-error>
+    <mat-label>titre</mat-label>
+    <input matInput type="text" formControlName="titre"/>
+    <mat-error *ngIf="list.hasError('required', 'titre')">title is required </mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>class</mat-label>
-    <input matInput type="text" formControlName="class"/>
-    <mat-error *ngIf="list.hasError('required', 'class')">class is required </mat-error>
+    <mat-label>description</mat-label>
+    <input matInput type="text" formControlName="description"/>
+    <mat-error *ngIf="list.hasError('required', 'description')">description is required </mat-error>
   </mat-form-field>
 <button  class="btn btn-primary ml-4" mat-raised-button (click)="add()">ADD</button>
 </form>
-<input type="file" name="image" (change)="fileProgress($event)" >
+<form>
+    <div *ngIf="vote">
+      <div>{{vote.titre}}</div>
+      <div>{{vote.description}}</div>
+    </div>
+    <label id="Select an option">choose </label>
+    <br />
+    <mat-radio-group
+      aria-label="Select an option"
+      name="choix"
+      [(ngModel)]="choix"
+    >
+      <mat-radio-button value="oui">yes</mat-radio-button>
+      <mat-radio-button value="non">no</mat-radio-button>
+    </mat-radio-group>
+    <br />
+    <button type="button" (click)="onSubmit()">vote</button>
+  </form>
 </div>

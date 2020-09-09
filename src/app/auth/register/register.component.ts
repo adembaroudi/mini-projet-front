@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup , FormControl , Validators } from '@angular/forms';
 import { ApiserviceService } from 'src/app/apiservice.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,21 +12,20 @@ import { ApiserviceService } from 'src/app/apiservice.service';
 export class RegisterComponent implements OnInit {
   hide = true;
   RegisterForm: FormGroup ;
-  constructor(private apService : ApiserviceService) { }
+  constructor(private apService : ApiserviceService, private router : Router) { }
 
   ngOnInit(): void {
     this.RegisterForm = new FormGroup({
-      UserName : new FormControl ('', Validators.required),
+      userName : new FormControl ('', Validators.required),
       email : new FormControl ('', Validators.required),
       password : new FormControl ('', Validators.required),
-      // ConfirmPassword : new FormControl ('', Validators.required),
-      // validator: MustMatch('password', 'confirmPassword')
+   
 
   });
 }
 register() {
  this.apService.reg(this.RegisterForm.value).subscribe(res => {
-   console.log(res);
+  this.router.navigate(["/login"]);
 
  });
 }
