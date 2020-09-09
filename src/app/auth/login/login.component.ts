@@ -22,8 +22,10 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.apService.signin(this.LoginForm.value).subscribe(res => {
+      console.log(res);
+      
       this.responseData = res ;
-      localStorage.setItem('token', this.responseData.token);
+      localStorage.setItem('token', this.responseData.message);
       this.router.navigate(["/list"]);
     });
   }
