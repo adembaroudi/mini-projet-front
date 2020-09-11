@@ -1,12 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { ApiserviceService } from "src/app/apiservice.service";
+import * as jwt_decode from 'jwt-decode';
 @Component({
   selector: "app-list",
   templateUrl: "./list.component.html",
   styleUrls: ["./list.component.css"],
 })
 export class ListComponent implements OnInit {
+  token = localStorage.getItem('token') || {};
+  decode = jwt_decode(this.token);
   table;
   updatecars: FormGroup;
   j;
@@ -22,9 +25,9 @@ export class ListComponent implements OnInit {
     this.get();
   }
   get() {
-    this.apiservice.getall().subscribe((res: any) => {
+    this.apiservice.getOne(this.decode.data._id).subscribe((res: any) => {
       console.log(res);
-      this.table = res.data;
+      this.table =res. data
     });
   }
   remove(i) {

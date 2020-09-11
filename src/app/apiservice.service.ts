@@ -27,8 +27,8 @@ export class ApiserviceService {
     return this.http.get(url);
   }
 
-  getOne(j) {
-    const url = `${this.baseUrl}/sujet/getone/${j}`;
+  getOne(id) {
+    const url = `${this.baseUrl}/sujet/getone/${id}`;
     return this.http.get(url);
   }
   update(j) {
