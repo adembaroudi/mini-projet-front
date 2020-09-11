@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiserviceService } from 'src/app/apiservice.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-add',
@@ -10,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  token = localStorage.getItem('token') || {};
+  decode = jwt_decode(this.token);
   hide = true;
   list: FormGroup;
   fileToUpload :File= null;
@@ -27,7 +29,8 @@ export class AddComponent implements OnInit {
     this.id = this.route.snapshot.params["id"];
   }
   add() {
-    this.apService.Ajout(this.list.value).subscribe((res: any) => {
+  
+    this.apService.Ajout(this.list.value,this.decode.data._id).subscribe((res: any) => {
       this.router.navigate(["/list"]);
     });
       };

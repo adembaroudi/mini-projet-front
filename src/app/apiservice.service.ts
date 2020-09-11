@@ -17,8 +17,8 @@ export class ApiserviceService {
     const url = `${this.baseUrl}/login/login`;
     return this.http.post(url, data);
   }
-  Ajout(data) {
-    const url = `${this.baseUrl}/sujet/add`;
+  Ajout(data,id) {
+    const url = `${this.baseUrl}/sujet/add/${id}`;
     console.log(data);
     return this.http.post(url, data);
   }
